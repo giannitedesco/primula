@@ -1,0 +1,9 @@
+# redo
+/.redo
+
+# python
+__pycache__
+/.mypy_cache
+
+# Text editors
+.*.swp
