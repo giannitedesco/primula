@@ -1,4 +1,4 @@
-from typing import List, Optional, Any, Iterable, Type, Callable
+from typing import List, Optional, Any, Iterable, Type
 from array import array
 from abc import ABCMeta
 import logging
@@ -53,7 +53,6 @@ class _ComponentMeta(ABCMeta):
 
     def __new__(cls, name, bases, dct):
         cls = super().__new__(cls, name, bases, dct)
-        items = cls.__dict__.items()
 
         # Abstract classes
         try:

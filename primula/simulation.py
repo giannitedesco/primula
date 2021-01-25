@@ -14,7 +14,7 @@ class Simulation:
     __slots__ = ()
 
     @staticmethod
-    def run(seed: ComponentPin, level: Level):
+    def run(seed: ComponentPin, level: Level) -> None:
         epoch = SimStep()
         q: Deque[Event] = deque()
         sim.debug(f'Simulation seed is {seed}')

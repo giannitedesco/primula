@@ -8,6 +8,7 @@ __all__ = (
     'Level',
     'Pin',
     'Pull',
+    'Wire',
     'gates',
     'latches',
     'flipflops',

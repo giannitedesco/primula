@@ -1,5 +1,4 @@
-from typing import Generator
-from .base import Level, Pin
+from .base import Pin
 from .component import Component, EventGenerator
 
 
@@ -187,5 +186,4 @@ __all__ = (
     'Or',
     'Or3',
     'Xor',
-    'Not',
 )

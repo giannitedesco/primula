@@ -1,4 +1,3 @@
-from typing import Generator
 from .base import Level, Pin
 from .component import Component, EventGenerator
 

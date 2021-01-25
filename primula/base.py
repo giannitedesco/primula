@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Generator, NamedTuple, Callable, Optional
+from typing import Generator, NamedTuple, Iterator
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from enum import Enum
@@ -23,7 +23,7 @@ class Pull(Enum):
     UP = 1
 
     @property
-    def level(self):
+    def level(self) -> Level:
         return Level(self.value)
 
 
@@ -45,16 +45,16 @@ class ComponentPin:
                   epoch: SimStep) -> EventGenerator:
         yield from self.component.propagate(self.pin, level, epoch)
 
-    def connected_pin(self, other: ComponentPin):
+    def connected_pin(self, other: ComponentPin) -> None:
         return self.component.connected_pin(self.pin, other)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[object]:
         return iter((self.component, self.pin))
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.component}#{self.pin}'
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'{self.component}#{self.pin}'
 
 
@@ -81,10 +81,10 @@ class ComponentBase(ABC):
         pass
 
     @abstractmethod
-    def connected_pin(self, pin: int, other: ComponentPin):
+    def connected_pin(self, pin: int, other: ComponentPin) -> None:
         pass
 
-    def pin(self, pin: int):
+    def pin(self, pin: int) -> ComponentPin:
         return ComponentPin(self, pin)
 
 

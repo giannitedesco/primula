@@ -1,8 +1,8 @@
-from argparse import ArgumentParser, REMAINDER
-from . import console
+from argparse import ArgumentParser
+from . import console  # noqa
 import logging
 
-from primula import gates, latches, Pull, Wire, Level
+from primula import latches, Pull, Wire, Level
 
 log = logging.getLogger()
 
