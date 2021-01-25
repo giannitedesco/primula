@@ -18,3 +18,9 @@ But it was a while ago since I wrote the code so maybe that isn't true?
 Various classic circuits (latches and flip-flops) are implemented in the
 test-suite, and their properties are tested to make sure the simulated circuits
 behave as expected.
+
+There are also prefabricated components for various latches and flip flops
+which are for convenience and performance.
+
+Eventually it would be nice to have components like n-bit busses, multiplexers,
+memories, and all the rest of it.
