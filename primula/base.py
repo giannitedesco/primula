@@ -35,8 +35,8 @@ class Pull(Enum):
     Used to drive a line to a specific logical level.
     """
 
-    DOWN = 0
-    UP = 1
+    DOWN = Level.LO.value
+    UP = Level.HI.value
 
     @property
     def level(self) -> Level:
@@ -75,7 +75,7 @@ class ComponentPin:
 
 
 class SimStep:
-    __slots__ = ('__weakref__')
+    __slots__ = ('__weakref__',)
 
 
 class ComponentBase(ABC):
