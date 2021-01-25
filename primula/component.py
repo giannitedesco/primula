@@ -17,6 +17,16 @@ sim = logging.getLogger('sim')
 
 
 class PinsBase:
+    """
+    Proxy for accessing pins by their names
+
+    All components have a 'pins' member. Accessing pins.PIN will lookup the
+    name 'PIN' to the pin index and return Component.pin(index) so that pins
+    can be hooked up. Performance of this proxy isn't a priority, the priority
+    is simulation speed. So all of this rigmarole is just to hide the fact that
+    pin configurations and states are in byte arrays.
+    """
+
     __slots__ = (
         '_owner',
         '_nr_pins',
@@ -47,6 +57,14 @@ class PinsBase:
 
 
 class _ComponentMeta(ABCMeta):
+    """
+    Metaclass to setup subclasses of the Component class.
+
+    This metaclass looks at the '_pin_names' array of any class which gets
+    instantiated. It creates the pins proxy type which is used to implement
+    Component.pins accessors which let you program pins by their names instead
+    of their numbers.
+    """
     __slots__ = ()
 
     _pin_names: Iterable[str]
@@ -69,11 +87,22 @@ class _ComponentMeta(ABCMeta):
 
 
 class Component(ComponentBase, metaclass=_ComponentMeta):
+    """
+    All components should derive from this.
+
+    It implements all the pin configurations and simulation state.  Subclasses
+    merely need to provide a `_pin_names` tuple as a class variable and an
+    `_on_change' method to implement the logic. You may also wish to override
+    the constructor in order to set the configurations for the pins which all
+    default in to high-impedance state.
+    """
+
     __slots__ = (
         '__weakref__',
         '_directions',
         '_levels',
-        '_connections',
+        '_conns',
+        'pins',
     )
 
     # instance variables
@@ -140,12 +169,24 @@ class Component(ComponentBase, metaclass=_ComponentMeta):
         yield Event(self.pin(pin), other, Level(new_level))
 
     def assert_pin(self, pin: int, level: bool) -> EventGenerator:
+        """
+        Drive a pin to logical 1 (True) or logical 0 (False)
+        """
+
         yield from self._set_output_level(pin, int(level))
 
     def error_pin(self, pin: int) -> EventGenerator:
+        """
+        Set a pin in to the error state.
+        """
+
         yield from self._set_output_level(pin, Level.ERR.value)
 
     def float_pin(self, pin: int) -> EventGenerator:
+        """
+        Set a pin as floating / disconnected
+        """
+
         yield from self._set_output_level(pin, Level.FLT.value)
 
     def _on_change(self, pin: int) -> EventGenerator:

@@ -3,10 +3,12 @@ from .component import Component, EventGenerator
 
 
 class Gate(Component):
+    __slots__ = ()
     pass
 
 
 class Nor(Gate):
+    __slots__ = ()
     _pin_names = (
         'a',
         'b',
@@ -28,6 +30,7 @@ class Nor(Gate):
 
 
 class Nand(Gate):
+    __slots__ = ()
     _pin_names = (
         'a',
         'b',
@@ -49,6 +52,7 @@ class Nand(Gate):
 
 
 class And(Gate):
+    __slots__ = ()
     _pin_names = (
         'a',
         'b',
@@ -70,6 +74,7 @@ class And(Gate):
 
 
 class And3(Gate):
+    __slots__ = ()
     _pin_names = (
         'a',
         'b',
@@ -94,6 +99,7 @@ class And3(Gate):
 
 
 class Or(Gate):
+    __slots__ = ()
     _pin_names = (
         'a',
         'b',
@@ -115,6 +121,7 @@ class Or(Gate):
 
 
 class Or3(Gate):
+    __slots__ = ()
     _pin_names = (
         'a',
         'b',
@@ -139,6 +146,7 @@ class Or3(Gate):
 
 
 class Xor(Gate):
+    __slots__ = ()
     _pin_names = (
         'a',
         'b',
@@ -160,6 +168,7 @@ class Xor(Gate):
 
 
 class Inverter(Gate):
+    __slots__ = ()
     _pin_names = (
         'inp',
         'out',

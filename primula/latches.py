@@ -3,10 +3,12 @@ from .component import Component, EventGenerator
 
 
 class Latch(Component):
+    __slots__ = ()
     pass
 
 
 class SR(Latch):
+    __slots__ = ()
     _pin_names = (
         's',
         'r',
