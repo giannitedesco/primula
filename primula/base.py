@@ -6,19 +6,35 @@ from enum import Enum
 
 
 class Level(Enum):
-    LO = 0
-    HI = 1
-    FLT = 2
-    ERR = 3
+    """
+    Different logical levels that a wire can be at
+    """
+
+    LO = 0  # LO state
+    HI = 1  # HI state
+    FLT = 2  # floating, just a conductor with no current accross it...
+    ERR = 3  # error, pseudo-state so that errors can be located
 
 
 class Pin(Enum):
+    """
+    Logical directions of pins.
+
+    Are they inputs/outputs/disconnected?
+    """
+
     IN = 0
     OUT = 1
     HIZ = 0xff  # High-impedence / Hi-Z state
 
 
 class Pull(Enum):
+    """
+    A pull-up or pull-down resistor.
+
+    Used to drive a line to a specific logical level.
+    """
+
     DOWN = 0
     UP = 1
 
